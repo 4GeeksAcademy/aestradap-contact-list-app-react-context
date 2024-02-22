@@ -11,7 +11,7 @@ export const ContactList = () => {
 	const { store, actions } = useContext(Context);
 
 	return (
-		<div className="container">
+		<div className="container mt-2">
 			<ul className="list-group">
 				{store.demo.map((item, index) => {
 					return (

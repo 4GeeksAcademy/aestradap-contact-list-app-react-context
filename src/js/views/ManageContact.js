@@ -9,9 +9,14 @@ export const ManageContact = () => {
 	const { store, actions } = useContext(Context);
 
 	return (
-		<div className="container">
+		<div className="container mt-5">
+           <div className="text-center">
+            <h1>Add a new contact</h1>
+            {/* <h1>Edit contact</h1> */}
+
+           </div>
 			<form>
-                <div className="mb-3">
+                <div className="mb-3 mt-2">
                     <label for="exampleInputEmail1" className="form-label">Email address</label>
                     <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
                     <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
@@ -24,12 +29,14 @@ export const ManageContact = () => {
                     <input type="checkbox" className="form-check-input" id="exampleCheck1"/>
                     <label className="form-check-label" for="exampleCheck1">Check me out</label>
                 </div>
-                <button type="submit" className="btn btn-primary">Submit</button>
-                </form>
-			<br />
-			<Link to="/">
-				<button className="btn btn-primary">Back home</button>
-			</Link>
+                <div className="d-flex justify-content-between">
+                    <button type="submit" className="btn btn-primary">Submit</button>
+                    <Link to="/">
+                        <button className="btn btn-primary">Back home</button>
+                    </Link>
+                </div>
+                
+            </form>
 		</div>
 	);
 };
