@@ -1,6 +1,5 @@
 
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
 
 import { Context } from "../store/appContext";
 import { Contact } from "./Contact";
@@ -18,14 +17,10 @@ export const ContactList = () => {
 						<li
 							key={index}
 							className="list-group-item d-flex justify-content-between"
-							style={{ background: item.background }}>
-							<Link to={"/single/" + index}>
-								<span>Link to: {item.title}</span>
-							</Link>
-							    <Contact />
-							<button className="btn btn-success" onClick={() => actions.changeColor(index, "orange")}>
-								Change Color
-							</button>
+							style={{ background: item.background }}
+						>
+							<Contact index={index} item={item} />
+					
 						</li>
 					);
 				})}
