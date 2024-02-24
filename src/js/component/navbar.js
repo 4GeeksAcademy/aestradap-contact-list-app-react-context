@@ -7,12 +7,12 @@ export const Navbar = () => {
 			<div className="container">
 				<div className="d-flex justify-content-end align-items-center">
 				<Link to="/" className="text-decoration-none">
-						<span className="navbar-brand mb-0 h1">Agendas-Contacts</span>
+						<span className="navbar-brand mun start-0 h1">Agendas-Contacts</span>
 					</Link>	
 				</div>
 				<div className="d-flex justify-content-end align-items-center">
 					<Link to="/create-contact" className="text-decoration-none">
-						<span className="navbar-brand mb-0 h1">Add Contact</span>
+						<span className="navbar-brand m-0 h1">Add Contact</span>
 					</Link>	
 				</div>
 			</div>
