@@ -11,27 +11,36 @@ import "../../styles/demo.css";
 export const Contact = ({index, item}) => {
 	const { actions } = useContext(Context);
 
-return <div class="container text-center">
-	<div class="row">
-		<div class="col">
-		<img src="https://img.freepik.com/free-vector/mysterious-mafia-man-smoking-cigarette_52683-34828.jpg?w=740&t=st=1708803073~exp=1708803673~hmac=cb2de4e72dba360eaeb15a5deefaf493ddcaca83e6b9ee721bbf983aedfdbf99"
-		 alt="Avatar" style={{width:200, borderRadius: 50}}/>
+return <div className="container text-center">
+	<div className="row">
+		<div className="col">
+		<img src="https://github.com/4GeeksAcademy/aestradap-react-hello-webapp/blob/master/src/img/img_avatar.png?raw=true"
+		 alt="Avatar" style={{width:150, borderRadius: 100}}/>
 			
 		</div>
-		<div class="col">
-			<i className="bi bi-pencil-square"></i>
-					<i class="bi bi-trash3"></i>
+		<div className="col d-flex align-items-center">
+		
+			<div className="text-start">
+				<label class="form-label fs-4">ALAIN ESTRADA</label>
+				<div className="form-text fs-6">
+					<i class="bi bi-geo-alt-fill"/> 1178 NW 136st Miami,FL
+				</div>
+				<div className="form-text fs-6">
+					<i class="bi bi-telephone-fill"/> 786-864-4677
+				</div>
+				<div className="form-text fs-6">
+					<i class="bi bi-envelope-fill"/> aestradap17@gmail.com
+				</div>
+			</div>
+			
+		
+			
 		</div>
-		<div class="col">
-			<i className="bi bi-pencil-square"></i>
-					<i class="bi bi-trash3"></i>
+		<div className="col d-flex align-items-center justify-content-center">
+			<i className="bi bi-pencil-fill me-5" style={{fontSize: 30}} ></i>
+			<i className="bi bi-trash3-fill" style={{fontSize: 30}} ></i>
 		</div>
 	</div>
-
-	
-
-	
-	
 	{/* <Link to={"/single/" + index}>
 					<i className="bi bi-icon_name"></i>
 						<span>Link to: {item.title}</span>

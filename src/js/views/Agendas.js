@@ -26,14 +26,14 @@ export const Agendas = () => {
                                 <span className="input-group-text" id="basic-addon1">
                                         Agendas
                                 </span>
-                                {/* <select className="form-select" aria-label="Default select example">
+                                <select className="form-select" aria-label="Default select example">
                                         <option selected>
                                                 agenda selecionada
                                         </option>
                                         <option value="1">One</option>
                                         <option value="2">Two</option>
                                         <option value="3">Three</option>
-                                </select> */}
+                                </select>
                         </div>
                 </div>    
         </div> 
