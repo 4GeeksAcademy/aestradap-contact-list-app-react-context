@@ -9,15 +9,20 @@ import "../../styles/demo.css";
 export const ContactList = () => {
 	const { store, actions } = useContext(Context);
 
+	// useEffect(()=>{
+	// 	if(store.agendaSlug !== "")
+	// 	actions.loadMyContacts(store.agendaSlug);
+	// },[]);
+
+
 	return <ul className="list-group">
-		{store.demo.map((item, index) => {
+		{store.myContacts.map((contact, index) => {
 			return (
 				<li
 					key={index}
 					className="list-group-item d-flex justify-content-between"
-					style={{ background: item.background }}
 				>
-					<Contact index={index} item={item} />
+					<Contact index={index} contact={contact} />
 			
 				</li>
 			);

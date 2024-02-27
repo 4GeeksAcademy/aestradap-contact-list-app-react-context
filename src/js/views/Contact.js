@@ -8,7 +8,7 @@ import "../../styles/demo.css";
  
 
 
-export const Contact = ({index, item}) => {
+export const Contact = ({index, contact}) => {
 	const { actions } = useContext(Context);
 
 return <div className="container text-center">
@@ -21,20 +21,17 @@ return <div className="container text-center">
 		<div className="col d-flex align-items-center">
 		
 			<div className="text-start">
-				<label class="form-label fs-4">ALAIN ESTRADA</label>
+				<label class="form-label fs-4">{ contact.full_name }</label>
 				<div className="form-text fs-6">
-					<i class="bi bi-geo-alt-fill"/> 1178 NW 136st Miami,FL
+					<i class="bi bi-geo-alt-fill"/> { contact.address }
 				</div>
 				<div className="form-text fs-6">
-					<i class="bi bi-telephone-fill"/> 786-864-4677
+					<i class="bi bi-telephone-fill"/> { contact.phone }
 				</div>
 				<div className="form-text fs-6">
-					<i class="bi bi-envelope-fill"/> aestradap17@gmail.com
+					<i class="bi bi-envelope-fill"/> { contact.email }
 				</div>
 			</div>
-			
-		
-			
 		</div>
 		<div className="col d-flex align-items-center justify-content-center">
 			<i className="bi bi-pencil-fill me-5" style={{fontSize: 30}} ></i>
@@ -53,3 +50,5 @@ return <div className="container text-center">
 	 
 </div>
 };
+
+
