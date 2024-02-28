@@ -38,8 +38,7 @@ return <div className="container text-center">
 		<button 
 			className= "btn border border-0 mx-10"
 				type="button"
-				onClick={ ()=>{ actions.getOneContact(contact.id);
-					navigate(`/contact/${contact.id}`) } }
+				onClick={() => navigate(`/contact/${contact.id}`) } 
 				
           >     
          <i className="bi bi-pencil-fill me-5" style={{fontSize: 30}} />

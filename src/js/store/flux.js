@@ -60,11 +60,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 			
 			},
 
-			getOneContact: async (contact_id) => {
-				const toEditContact = await getDataContact(contact_id);
-				if(!toEditContact.error)
-				setStore({ toEditContact: toEditContact });
-				console.log(toEditContact);
+			getContact: async (id) => {
+				const response = await fetch(
+					`https://playground.4geeks.com/apis/fake/contact/${id}`
+				);
+				const person = await response.json();
+				console.log(person);
+				return person;
+				
 			},
 
 			setCurrentSlug: (slug) => {

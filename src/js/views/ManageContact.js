@@ -11,15 +11,22 @@ export const ManageContact = () => {
 
 	const { store, actions } = useContext(Context);
    
-    const [ toSubmit, setToSubmit ] = useState( params.id 
-        ? store.toEditContact
-        :{
-           full_name: "Dave Bradley",
-           email: "dave@gmail.com",
-           agenda_slug: store.agenda_slug,
-           address:"47568 NW 34ST, 33434 FL, USA",
-           phone:"7864445566"
-        });
+    const [ toSubmit, setToSubmit ] = useState({});
+
+        useEffect(() => {
+            if(params.id){
+                actions.getContact(params.id)
+                .then(contact => setToSubmit(contact));
+            }else{
+                setToSubmit({
+                    full_name: "Dave Bradley",
+                    email: "dave@gmail.com",
+                    agenda_slug: store.agenda_slug,
+                    address:"47568 NW 34ST, 33434 FL, USA",
+                    phone:"7864445566" 
+                 })
+            }
+        }, [params.id])
 
     const handleChange = ({name, value}) => {
         setToSubmit(prevent => ({
@@ -39,9 +46,11 @@ export const ManageContact = () => {
 	return <>
 		<div className="container mt-5">
            <div className="text-center">
-            <h1>Add a new contact on {store.agenda_slug}</h1>
-            {/* <h1>Edit contact</h1> */}
-
+            {params.id 
+                ? <h1>Edit contact on {store.agenda_slug}</h1>
+                : <h1>Add a new contact on {store.agenda_slug}</h1>
+            }
+           
            </div>
 			<form onSubmit={handleSubmit}>
                 <div className="mb-3 mt-2">
