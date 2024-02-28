@@ -45,16 +45,6 @@ export const getDataContact = async (contact_id) => {
   };
 
 //Create one contact
-
-
-                //   body:
-                //   {
-                //       "full_name": "Dave Bradley",
-                //       "email": "dave@gmail.com",
-                //       "agenda_slug": "my_super_agenda",
-                //       "address":"47568 NW 34ST, 33434 FL, USA",
-                //       "phone":"7864445566"
-                //   }
 export const createDataContact = async ( data ) => {
     const response = await fetch(`${BASE_URL}`, {
         method: 'POST',
@@ -73,16 +63,6 @@ export const createDataContact = async ( data ) => {
     };
 };
 
-
-
-                    //   body:
-                    //   {
-                    //       "full_name": "Dave Bradley",
-                    //       "email": "dave@gmail.com",
-                    //       "agenda_slug": "my_super_agenda",
-                    //       "address":"47568 NW 34ST, 33434 FL, USA",
-                    //       "phone":"7864445566"
-                    //   }
 //update one contact
 export const updateData = async (contact_id) => {
     console.log(JSON.stringify(data))

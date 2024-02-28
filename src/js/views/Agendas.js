@@ -20,16 +20,23 @@ export const Agendas = () => {
                         const slug_flag = store.myAgendas.filter((slug) => slug === newAgenda);
                         if(slug_flag.length !== 0){
                                 setAlertFlag(true);
+                                setTimeout(() => {
+                                        setAlertFlag(false);
+                                      }, 4000);
+                        }else{
+                                actions.createContact({
+                                        full_name: "Jhon Doe",
+                                        email: "jhondoe@gmail.com",
+                                        agenda_slug: newAgenda,
+                                        address:"47568 NW 34ST, 33434 FL, USA",
+                                        phone:"7864445566"
+                                });
+                               
+                                // actions.loadMyAgendas(newAgenda);
+                                actions.setCurrentSlug(newAgenda);
+                                // actions.loadMyContacts(newAgenda);
+                                setNewAgenda('');
                         }
-			actions.createContact({
-				full_name: "Jhon Doe",
-				email: "jhondoe@gmail.com",
-				agenda_slug: newAgenda,
-				address:"47568 NW 34ST, 33434 FL, USA",
-				phone:"7864445566"
-			});
-			setNewAgenda('');
-                        actions.loadMyAgendas();
 		}
 	}
 
@@ -37,7 +44,7 @@ export const Agendas = () => {
 return <div className="row">
         {
                 alertFlag && <div class="alert alert-danger" role="alert">
-				A simple danger alert—check it out!
+				Make sure this agenda does not exist, look at the list if necessary.
 			</div>}
 			
 			
@@ -61,7 +68,7 @@ return <div className="row">
                         </span> <select className="form-select"
                                         onChange={event => handlerChangeAgenda(event)}>
                                 {store.myAgendas.map((agenda, index) => (
-                                        <option selected 
+                                        <option selected={agenda === store.agenda_slug}
                                                 key={index}
                                                 value={agenda}
                                         >{agenda}

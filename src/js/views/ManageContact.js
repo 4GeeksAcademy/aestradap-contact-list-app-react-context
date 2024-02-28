@@ -1,36 +1,89 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { Context } from "../store/appContext";
 
 import "../../styles/demo.css";
 
 export const ManageContact = () => {
-	const { store, actions } = useContext(Context);
+    const navigate = useNavigate();
 
-	return (
+	const { store, actions } = useContext(Context);
+    const [ toSubmit, setToSubmit ] = useState( {
+        full_name: "Dave Bradley",
+        email: "dave@gmail.com",
+        agenda_slug: store.agenda_slug,
+        address:"47568 NW 34ST, 33434 FL, USA",
+        phone:"7864445566"
+    });
+
+    const handleChange = ({name, value}) => {
+        setToSubmit(prevent => ({
+            ...prevent,
+            [name]:value
+        }))
+    };
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+    
+        actions.createContact(toSubmit);
+        navigate("/");
+    
+        // Call any necessary submission methods here
+        // ...
+    
+        // history.push('/my-new-page'); // Redirect to new page
+      };
+    
+
+	return <>
 		<div className="container mt-5">
            <div className="text-center">
-            <h1>Add a new contact</h1>
+            <h1>Add a new contact on {store.agenda_slug}</h1>
             {/* <h1>Edit contact</h1> */}
 
            </div>
-			<form>
+			<form onSubmit={handleSubmit}>
                 <div className="mb-3 mt-2">
                     <label className="form-label">Full Name</label>
-                    <input type="text"  placeholder="Full Name" className="form-control"/>
+                    <input type="text" 
+                     placeholder="Full Name" 
+                     className="form-control"
+                     name="full_name"
+                     value={toSubmit.full_name}
+                     onChange={(event) => handleChange(event.target)}
+                     />
                 </div>
                 <div className="mb-3 mt-2">
                     <label className="form-label">Email</label>
-                    <input type="email" placeholder="Email" className="form-control" aria-describedby="emailHelp"/>
+                    <input type="email" 
+                    placeholder="Email" 
+                    className="form-control"
+                    name="email"
+                    value={toSubmit.email}
+                    onChange={(event) => handleChange(event.target)}
+                    />
                 </div>
                 <div className="mb-3 mt-2">
                     <label className="form-label">Phone</label>
-                    <input type="number" placeholder="Phone" className="form-control" />
+                    <input type="number"
+                     placeholder="Phone" 
+                     className="form-control"
+                     name="phone"
+                     value ={toSubmit.phone}
+                     onChange={(event) => handleChange(event.target)}
+                    />
                 </div>
                 <div className="mb-3 mt-2">
                     <label className="form-label">Address</label>
-                    <input type="text" placeholder="Address" className="form-control"/>
+                    <input type="text"
+                     placeholder="Address"
+                     className="form-control"
+                     name="address"
+                     value={toSubmit.address}
+                     onChange={(event) => handleChange(event.target)}
+                    />
                 </div>
                 <div className="d-flex justify-content-between">
                     <button type="submit" className="btn btn-primary">Submit</button>
@@ -41,5 +94,5 @@ export const ManageContact = () => {
                 
             </form>
 		</div>
-	);
+    </>
 };

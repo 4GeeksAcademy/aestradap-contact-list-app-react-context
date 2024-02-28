@@ -35,19 +35,17 @@ return <div className="container text-center">
 		</div>
 		<div className="col d-flex align-items-center justify-content-center">
 			<i className="bi bi-pencil-fill me-5" style={{fontSize: 30}} ></i>
-			<i className="bi bi-trash3-fill" style={{fontSize: 30}} ></i>
+			<button 
+			className= "btn border border-0 mx-10"
+				type="button"
+				onClick={ ()=>{ actions.deleteContact(contact.id, contact.agenda_slug) } }
+          >     
+           <i className="bi bi-trash3-fill" style={{fontSize: 30}} ></i>
+        </button> 
+			
 		</div>
 	</div>
-	{/* <Link to={"/single/" + index}>
-					<i className="bi bi-icon_name"></i>
-						<span>Link to: {item.title}</span>
-					</Link> */}
-	{/* <button className="btn btn-success" onClick={() => actions.changeColor(index, "orange")}>
-		Change Color
-	</button> */}
 	
-	{/* <i className="bi-alarm" style="font-size: 2rem; color: cornflowerblue;"></i> */}
-	 
 </div>
 };
 

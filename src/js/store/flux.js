@@ -1,4 +1,4 @@
-import { createDataContact, getDataAgendas, getDataContactsAgenda } from "../component/dataSync/dataFechtApi"
+import { createDataContact, getDataAgendas, getDataContactsAgenda, deleteDataContact } from "../component/dataSync/dataFechtApi"
 
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
@@ -21,12 +21,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 			]
 		},
 		actions: {
-			loadMyAgendas: async () => {
+			loadMyAgendas: async (new_slug) => {
 					const myAgendas  = await getDataAgendas();
 					if(!myAgendas.error){
 						setStore({myAgendas:myAgendas})
-						setStore({agenda_slug:myAgendas[myAgendas.length - 1]})
-						const myContacts = await getDataContactsAgenda(myAgendas[myAgendas.length - 1]);
+						setStore({agenda_slug:new_slug
+							? new_slug
+							: myAgendas[myAgendas.length - 1]});
+
+						const myContacts = await getDataContactsAgenda(new_slug 
+							? new_slug
+							: myAgendas[myAgendas.length - 1]);
 							if(!myContacts.error){
 								setStore({myContacts:myContacts})
 							} else console.log(myContacts.error);
@@ -44,7 +49,29 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const response = await createDataContact(contactData);
 				if(!response.error)
 				console.log(response);
-				// setStore({currentContact:response});
+				const reloadAg = await getDataAgendas();
+				if(!reloadAg.error)
+					setStore({myAgendas:reloadAg});
+				 else console.log(reloadAg.error);
+				 const myContacts = await getDataContactsAgenda(contactData.agenda_slug);
+					if(!myContacts.error){
+						setStore({myContacts:myContacts})
+					} else console.log(myContacts.error);
+			
+			},
+
+			setCurrentSlug: (slug) => {
+				setStore({agenda_slug: slug});
+			},
+
+			deleteContact: async (id, agenda_slug) => {
+				const response = await deleteDataContact(id);
+				if(!response.error)
+				console.log(response.msg);
+				const myContacts = await getDataContactsAgenda(agenda_slug);
+				if(!myContacts.error){
+					setStore({myContacts:myContacts})
+				} else console.log(myContacts.error);
 			},
 
 			changeColor: (index, color) => {
