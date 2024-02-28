@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 import { Context } from "../store/appContext";
 
@@ -7,15 +7,19 @@ import "../../styles/demo.css";
 
 export const ManageContact = () => {
     const navigate = useNavigate();
+    const params = useParams();
 
 	const { store, actions } = useContext(Context);
-    const [ toSubmit, setToSubmit ] = useState( {
-        full_name: "Dave Bradley",
-        email: "dave@gmail.com",
-        agenda_slug: store.agenda_slug,
-        address:"47568 NW 34ST, 33434 FL, USA",
-        phone:"7864445566"
-    });
+   
+    const [ toSubmit, setToSubmit ] = useState( params.id 
+        ? store.toEditContact
+        :{
+           full_name: "Dave Bradley",
+           email: "dave@gmail.com",
+           agenda_slug: store.agenda_slug,
+           address:"47568 NW 34ST, 33434 FL, USA",
+           phone:"7864445566"
+        });
 
     const handleChange = ({name, value}) => {
         setToSubmit(prevent => ({
@@ -29,11 +33,6 @@ export const ManageContact = () => {
     
         actions.createContact(toSubmit);
         navigate("/");
-    
-        // Call any necessary submission methods here
-        // ...
-    
-        // history.push('/my-new-page'); // Redirect to new page
       };
     
 

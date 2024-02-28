@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { Context } from "../store/appContext";
 
@@ -10,6 +10,7 @@ import "../../styles/demo.css";
 
 export const Contact = ({index, contact}) => {
 	const { actions } = useContext(Context);
+	const navigate = useNavigate();
 
 return <div className="container text-center">
 	<div className="row">
@@ -34,13 +35,22 @@ return <div className="container text-center">
 			</div>
 		</div>
 		<div className="col d-flex align-items-center justify-content-center">
-			<i className="bi bi-pencil-fill me-5" style={{fontSize: 30}} ></i>
+		<button 
+			className= "btn border border-0 mx-10"
+				type="button"
+				onClick={ ()=>{ actions.getOneContact(contact.id);
+					navigate(`/contact/${contact.id}`) } }
+				
+          >     
+         <i className="bi bi-pencil-fill me-5" style={{fontSize: 30}} />
+        </button> 
+			
 			<button 
 			className= "btn border border-0 mx-10"
 				type="button"
 				onClick={ ()=>{ actions.deleteContact(contact.id, contact.agenda_slug) } }
           >     
-           <i className="bi bi-trash3-fill" style={{fontSize: 30}} ></i>
+           <i className="bi bi-trash3-fill" style={{fontSize: 30}} />
         </button> 
 			
 		</div>

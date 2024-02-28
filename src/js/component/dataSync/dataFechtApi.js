@@ -31,7 +31,7 @@ export const getDataContactsAgenda = async (agenda_slug) => {
   };
 };
 
- //Get One Particular Contact
+ //Get One Particular Contact/apis/fake/contact/{contact_id}
 export const getDataContact = async (contact_id) => {
     const response = await fetch(`${BASE_URL}${contact_id}`);
     if (response.ok) {

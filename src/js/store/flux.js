@@ -1,11 +1,11 @@
-import { createDataContact, getDataAgendas, getDataContactsAgenda, deleteDataContact } from "../component/dataSync/dataFechtApi"
+import { createDataContact, getDataAgendas, getDataContactsAgenda, deleteDataContact, getDataContact } from "../component/dataSync/dataFechtApi"
 
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			myAgendas: [],
 			myContacts: [],
-			currentContact:{},
+			toEditContact: null,
 			agenda_slug:"",
 			demo: [
 				{
@@ -24,16 +24,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 			loadMyAgendas: async (new_slug) => {
 					const myAgendas  = await getDataAgendas();
 					if(!myAgendas.error){
-						setStore({myAgendas:myAgendas})
-						setStore({agenda_slug:new_slug
+						setStore({ myAgendas:myAgendas })
+						setStore({ agenda_slug:new_slug
 							? new_slug
-							: myAgendas[myAgendas.length - 1]});
+							: myAgendas[myAgendas.length - 1] });
 
 						const myContacts = await getDataContactsAgenda(new_slug 
 							? new_slug
 							: myAgendas[myAgendas.length - 1]);
 							if(!myContacts.error){
-								setStore({myContacts:myContacts})
+								setStore({ myContacts:myContacts })
 							} else console.log(myContacts.error);
 					} else console.log(myAgendas.error)
 			},
@@ -41,7 +41,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			loadMyContacts: async (agenda_slug) => {
 				const myContacts = await getDataContactsAgenda(agenda_slug);
 							if(!myContacts.error){
-								setStore({myContacts:myContacts})
+								setStore({ myContacts:myContacts })
 							} else console.log(myContacts.error);
 			},
 
@@ -51,13 +51,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 				console.log(response);
 				const reloadAg = await getDataAgendas();
 				if(!reloadAg.error)
-					setStore({myAgendas:reloadAg});
+					setStore({ myAgendas:reloadAg });
 				 else console.log(reloadAg.error);
 				 const myContacts = await getDataContactsAgenda(contactData.agenda_slug);
 					if(!myContacts.error){
-						setStore({myContacts:myContacts})
+						setStore({ myContacts:myContacts })
 					} else console.log(myContacts.error);
 			
+			},
+
+			getOneContact: async (contact_id) => {
+				const toEditContact = await getDataContact(contact_id);
+				if(!toEditContact.error)
+				setStore({ toEditContact: toEditContact });
+				console.log(toEditContact);
 			},
 
 			setCurrentSlug: (slug) => {
